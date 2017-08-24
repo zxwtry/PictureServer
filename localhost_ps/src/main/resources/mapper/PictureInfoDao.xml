@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxwtry.pictureServer.dao.PictureInfoDao">
+    <resultMap id="pictureInfoMap"
+        type="com.zxwtry.pictureServer.entity.PictureInfo" >
+        <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="largeIndex" column="large_index" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="largeOffset" column="large_offset" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="largeLength" column="large_length" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="wap180Index" column="wap180_index" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="wap180Offset" column="wap180_offset" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="wap180Length" column="wap180_length" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="bmiddleIndex" column="bmiddle_index" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="bmiddleOffset" column="bmiddle_offset" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="bmiddleLength" column="bmiddle_length" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="fileName" column="file_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="status" column="status" javaType="java.lang.Short" jdbcType="TINYINT"/>
+    </resultMap>
+    <select id="queryByFileName" 
+        resultMap="pictureInfoMap"
+        parameterType="java.lang.String">
+        SELECT 
+            *
+        From
+            picture_info
+        WHERE
+            file_name=#{fileName}
+        LIMIT 1
+    </select>
+    
+    <insert id="insert"
+        parameterType="com.zxwtry.pictureServer.entity.PictureInfo">
+        INSERT INTO picture_info 
+        (
+            large_index,
+            large_offset,
+            large_length,
+            wap180_index,
+            wap180_offset,
+            wap180_length,
+            bmiddle_index,
+            bmiddle_offset,
+            bmiddle_length,
+            file_name,
+            status
+        )
+        VALUES
+        (
+            #{largeIndex},
+            #{largeOffset},
+            #{largeLength},
+            #{wap180Index},
+            #{wap180Offset},
+            #{wap180Length},
+            #{bmiddleIndex},
+            #{bmiddleOffset},
+            #{bmiddleLength},
+            #{fileName},
+            #{status}
+        )
+    </insert>
+</mapper>

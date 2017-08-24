@@ -1,0 +1,16 @@
+body {
+    text-align: center;
+}
+
+div.wholePage {
+    margin:0 auto;
+    width: 1400px;
+    height: 800px;
+}
+
+div.topPart {
+    margin:0 auto;
+    text-align: left;
+    width: 400px;
+    height: 150px;
+}

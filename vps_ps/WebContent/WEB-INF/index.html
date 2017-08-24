@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>hello world</title>
+    <link rel="stylesheet" href="css/PictureServerCSSV1.css" type="text/css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    function doUpload() {
+    	document.getElementById("statusId").innerHTML = "状态： 正在上传";
+        var formData = new FormData($( "#uploadForm" )[0]);
+        $.ajax({
+             url: 'upload' ,
+             type: 'POST',
+             data: formData,
+             async: true,
+             cache: false,
+             contentType: false,
+             processData: false,
+             success: function (returndata) {
+            	 var urlPrefixWap180 = "wap180:  zxwtry.com/ps/wap180/";
+            	 var urlPrefixBmiddle = "bmiddle: zxwtry.com/ps/bmiddle/";
+            	 var urlPrefixLarge = "large:  zxwtry.com/ps/large/";
+            	 
+                 //var urlPrefixWap180 = "wap180:  localhost:8080/PictureServer01/wap180/";
+                 //var urlPrefixBmiddle = "bmiddle: localhost:8080/PictureServer01/bmiddle/";
+                 //var urlPrefixLarge = "large:  localhost:8080/PictureServer01/large/";
+                 
+                 //var urlPrefixWap180 = "wap180:  d2:9080/ps/wap180/";
+                 //var urlPrefixBmiddle = "bmiddle: d2:9080/ps/bmiddle/";
+                 //var urlPrefixLarge = "large:  d2:9080/ps/large/";
+                 
+            	 var urlPosfix = ".jpg";
+            	 document.getElementById("wap180Id").innerHTML = urlPrefixWap180 + returndata + urlPosfix;
+            	 document.getElementById("bmiddleId").innerHTML = urlPrefixBmiddle + returndata + urlPosfix;
+            	 document.getElementById("largeId").innerHTML = urlPrefixLarge + returndata + urlPosfix;
+            	 document.getElementById("statusId").innerHTML = "状态： 上传成功";
+             },
+             error: function (returndata) {
+            	 document.getElementById("statusId").innerHTML = "状态： 上传失败";
+             }
+        });
+    }
+    </script>
+    <script type="text/javascript">
+    	self.setInterval("doMsg2()", 1000);
+   		function doMsg2() {
+   	        $.ajax({
+                url: 'msg' ,
+                type: 'GET',
+                async: true,
+                success: function (returndata) {
+               	 document.getElementById("msgId").innerHTML = returndata;
+                },
+                error: function (returndata) {
+               	 document.getElementById("msgId").innerHTML = "";
+                }
+           });
+   		}
+    </script>
+    <script type="text/javascript">
+    	self.setInterval("doHdfs()", 1000);
+   		function doHdfs() {
+   	        $.ajax({
+                url: 'hdfs' ,
+                type: 'GET',
+                async: true,
+                success: function (returndata) {
+               	 document.getElementById("hdfsId").innerHTML = returndata;
+                },
+                error: function (returndata) {
+               	 document.getElementById("hdfsId").innerHTML = "";
+                }
+           });
+   		}
+    </script>
+</head>
+<body>
+    <div class="wholePage">
+        <br/><h2>上传页面</h2><br/>
+        <form id= "uploadForm">
+            <div class="topPart">
+                <p>上传文件：  <input type="file" name="file"/> </p>
+                <p>uid： <input type="text" value="000000001" name="uid" /></p>
+                <input type="button" value="上传" onclick="doUpload()" />
+                <p id="statusId">状态： </p>
+            </div>
+            <p><code><a id="wap180Id"></a></code></p>
+            <p><code><a id="bmiddleId"></a></code></p>
+            <p><code><a id="largeId"></a></code></p>
+        </form>  
+        <br/>
+	    <p><code><a id="msgId"></a></code></p><br/>
+	    <p><code><a id="hdfsId"></a></code></p><br/>
+    </div>
+</body>
+</html>

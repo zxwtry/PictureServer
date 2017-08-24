@@ -1,0 +1,5 @@
+url: zxwtry.com/ps
+
+info_collect:  信息收集，部署在每一个虚机上
+localhost_ps:  部署在主机的tomcat
+vps_ps:        部署在vps的tomcat
